@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { InputComponent } from '../../../../shared/ui/input/input.component';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../lib/auth/auth.service';
+import { AuthService } from '../../../../shared/lib/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,20 +25,26 @@ export class LoginComponent {
   router = inject(Router);
   authService = inject(AuthService);
 
-  async onSubmit() {
+  onSubmit() {
     if (this.loginForm.valid) {
       this.isLoading = true;
 
-      try {
-        const { username, password } = this.loginForm.value;
-        await this.authService.login(username as string, password as string);
+      const { username, password } = this.loginForm.value;
+      this.authService.login(username as string, password as string).subscribe({
+        next: (response) => {
+          if (response.user.hasCompletedOnboarding) {
+            this.router.navigateByUrl('/credit-analysis');
+            return;
+          }
 
-        this.router.navigateByUrl('/onboarding');
-      } catch (error) {
-        console.error('Erro ao fazer login:', error);
-      } finally {
-        this.isLoading = false;
-      }
+          this.router.navigateByUrl('/onboarding');
+        },
+        error: (error) => {
+          this.isLoading = false;
+          console.error('Erro ao fazer login:', error);
+        },
+        complete: () => this.isLoading = false
+      });
     }
   }
 

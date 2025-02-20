@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { InputComponent } from '../../../../shared/ui/input/input.component';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../../shared/lib/auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -28,20 +29,21 @@ export class RegisterComponent {
 
   isLoading = false;
   router = inject(Router);
+  authService = inject(AuthService);
 
   async onSubmit() {
     if (this.registerForm.valid) {
       this.isLoading = true;
-      
-      try {
-        await new Promise(resolve => setTimeout(resolve, 4000));
-        
-        await this.router.navigateByUrl('/auth/login');
-      } catch (error) {
-        console.error('Erro ao fazer cadastro:', error);
-      } finally {
-        this.isLoading = false;
-      }
+
+      const { name, username, password } = this.registerForm.value;
+
+      this.authService.register({ name: name as string, username: username as string, password: password as string }).subscribe({
+        next: () => this.router.navigateByUrl('/auth/login'),
+        error: (error) => {
+          this.isLoading = false;
+          console.error('Erro ao fazer cadastro:', error);
+        },
+      });
     }
   }
 

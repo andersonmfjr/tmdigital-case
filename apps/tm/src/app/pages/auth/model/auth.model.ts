@@ -2,7 +2,8 @@ export interface LoginResponse {
   access_token: string;
   user: {
     id: string;
-    email: string;
+    username: string;
+    name: string;
     hasCompletedOnboarding: boolean;
   };
 }

@@ -14,6 +14,14 @@ export const authGuard = (
   const router = inject(Router);
   const authService = inject(AuthService);
 
+  if (authService.isAuthenticated() && state.url.includes('onboarding') && authService.getHasCompletedOnboarding()) {
+    return router.createUrlTree(['/credit-analysis']);
+  }
+
+  if (authService.isAuthenticated() && state.url.includes('credit-analysis') && !authService.getHasCompletedOnboarding()) {
+    return router.createUrlTree(['/onboarding']);
+  }
+
   if (!authService.isAuthenticated()) {
     if (!state.url.startsWith('/auth/')) {
       return router.createUrlTree(['/auth/login']);
@@ -23,6 +31,10 @@ export const authGuard = (
   }
 
   if (state.url.includes('/auth/login') || state.url.includes('/auth/register')) {
+    if (authService.getHasCompletedOnboarding()) {
+      return router.createUrlTree(['/credit-analysis']);
+    }
+
     return router.createUrlTree(['/onboarding']);
   }
 

@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { authGuard } from '../pages/auth/lib/auth/auth.guard';
+import { authGuard } from '../shared/lib/auth/auth.guard';
 
 export const appRoutes: Route[] = [
   {
@@ -20,6 +20,11 @@ export const appRoutes: Route[] = [
   {
     path: 'onboarding',
     loadComponent: () => import('../pages/onboarding/ui/onboarding.component').then(m => m.OnboardingComponent),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'credit-analysis',
+    loadComponent: () => import('../pages/credit-analysis/ui/credit-analysis.component').then(m => m.CreditAnalysisComponent),
     canActivate: [authGuard],
   },
   {

@@ -13,6 +13,7 @@ import {
   stagger, 
   keyframes 
 } from '@angular/animations';
+import { OnboardingService } from '../lib/onboarding/onboarding.service';
 
 @Component({
   selector: 'app-onboarding',
@@ -102,20 +103,24 @@ export class OnboardingComponent {
   isLoading = false;
 
   router = inject(Router);
+  onboardingService = inject(OnboardingService);
 
   async onSubmit() {
     if (this.onboardingForm.valid) {
       this.isLoading = true;
       
-      try {
-        await new Promise(resolve => setTimeout(resolve, 4000));  
-  
-        await this.router.navigateByUrl('/auth/register');
-      } catch (error) {
-        console.error('Erro ao fazer onboarding:', error);
-      } finally {
-        this.isLoading = false;
-      }
+      this.onboardingService.saveFarm({
+        propertyName: this.onboardingForm.get('propertyName')?.value as string,
+        location: this.onboardingForm.get('location')?.value as string,
+        sector: this.onboardingForm.get('sector')?.value as string,
+        creditReason: this.onboardingForm.get('creditReason')?.value as string,
+      }).subscribe({
+        next: () => this.router.navigateByUrl('/credit-analysis'),
+        error: (error) => {
+          this.isLoading = false;
+          console.error('Erro ao fazer onboarding:', error);
+        },
+      });
     }
   }
 
