@@ -4,15 +4,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { InputComponent } from '../../../../shared/ui/input/input.component';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
-import {
-  animate,
-  style,
-  transition,
-  trigger,
-  query,
-  stagger,
-  keyframes
-} from '@angular/animations';
 import { AuthService } from '../../lib/auth/auth.service';
 
 @Component({
@@ -39,16 +30,37 @@ export class LoginComponent {
       this.isLoading = true;
 
       try {
-        await new Promise(resolve => setTimeout(resolve, 4000));
-        this.authService.login(this.loginForm.value.username as string);
+        const { username, password } = this.loginForm.value;
+        await this.authService.login(username as string, password as string);
 
-        await this.router.navigateByUrl('/onboarding');
+        this.router.navigateByUrl('/onboarding');
       } catch (error) {
         console.error('Erro ao fazer login:', error);
       } finally {
         this.isLoading = false;
       }
     }
+  }
+
+  getEmailError(): string | undefined {
+    const control = this.loginForm.get('username');
+
+    if (control?.errors && control.touched) {
+      if (control.errors['required']) return 'O e-mail é obrigatório';
+      if (control.errors['email']) return 'O e-mail está inválido';
+    }
+
+    return undefined;
+  }
+
+  getPasswordError(): string | undefined {
+    const control = this.loginForm.get('password');
+
+    if (control?.errors && control.touched) {
+      if (control.errors['required']) return 'A senha é obrigatória';
+    }
+
+    return undefined;
   }
 
   get currentYear() {

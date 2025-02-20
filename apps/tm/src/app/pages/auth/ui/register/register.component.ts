@@ -45,6 +45,48 @@ export class RegisterComponent {
     }
   }
 
+  getNameError(): string | undefined {
+    const control = this.registerForm.get('name');
+
+    if (control?.errors && control.touched) {
+      if (control.errors['required']) return 'O nome é obrigatório';
+    }
+
+    return undefined;
+  }
+
+  getEmailError(): string | undefined {
+    const control = this.registerForm.get('username');
+
+    if (control?.errors && control.touched) {
+      if (control.errors['required']) return 'O e-mail é obrigatório';
+      if (control.errors['email']) return 'O e-mail está inválido';
+    }
+
+    return undefined;
+  }
+
+  getPasswordError(): string | undefined {
+    const control = this.registerForm.get('password');
+
+    if (control?.errors && control.touched) {
+      if (control.errors['required']) return 'A senha é obrigatória';
+    }
+
+    return undefined;
+  }
+
+  getConfirmPasswordError(): string | undefined {
+    const control = this.registerForm.get('confirmPassword');
+
+    if (control?.errors && control.touched) {
+      if (control.errors['required']) return 'A senha é obrigatória';
+      if (control.errors['passwordMismatch']) return 'As senhas não coincidem';
+    }
+
+    return undefined;
+  }
+
   get currentYear() {
     return new Date().getFullYear();
   }

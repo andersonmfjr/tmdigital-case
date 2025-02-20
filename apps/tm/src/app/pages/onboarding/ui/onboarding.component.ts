@@ -118,4 +118,44 @@ export class OnboardingComponent {
       }
     }
   }
+
+  getPropertyNameError(): string | undefined {
+    const control = this.onboardingForm.get('propertyName');
+
+    if (control?.errors && control.touched) {
+      if (control.errors['required']) return 'O nome da propriedade é obrigatório';
+    }
+
+    return undefined;
+  }
+
+  getLocationError(): string | undefined {
+    const control = this.onboardingForm.get('location');
+
+    if (control?.errors && control.touched) {
+      if (control.errors['required']) return 'A localização é obrigatória';
+    }
+
+    return undefined;
+  }
+
+  getSectorError(): string | undefined {
+    const control = this.onboardingForm.get('sector');
+
+    if (control?.errors && control.touched) {
+      if (control.errors['required']) return 'O setor é obrigatório';
+    }
+
+    return undefined;
+  }
+
+  getCreditReasonError(): string | undefined {
+    const control = this.onboardingForm.get('creditReason');
+
+    if (control?.errors && control.touched) {
+      if (control.errors['required']) return 'A razão do crédito é obrigatória';
+    }
+
+    return undefined;
+  }
 }

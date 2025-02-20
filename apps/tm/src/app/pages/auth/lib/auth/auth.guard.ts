@@ -23,7 +23,7 @@ export const authGuard = (
   }
 
   if (state.url.includes('/auth/login') || state.url.includes('/auth/register')) {
-    return router.createUrlTree(['/dashboard']);
+    return router.createUrlTree(['/onboarding']);
   }
 
   return true;

@@ -15,7 +15,7 @@
       </h1>
       <p class="text-gray-600 text-lg">
         Para personalizar sua experiência, precisamos de algumas informações
-        sobre sua propriedade
+        sobre a propriedade
       </p>
     </div>
 
@@ -25,12 +25,16 @@
           label="Nome da Propriedade"
           formControlName="propertyName"
           placeholder="Ex: Fazenda São João"
+          [required]="true"
+          [error]="getPropertyNameError()"
         ></app-input>
 
         <app-input
           label="Setor Principal"
           formControlName="sector"
           placeholder="Ex: Agricultura, Pecuária"
+          [required]="true"
+          [error]="getSectorError()"
         ></app-input>
 
         <div class="md:col-span-2">
@@ -39,6 +43,8 @@
             formControlName="location"
             placeholder="Cidade/Estado e como chegar"
             type="textarea"
+            [required]="true"
+            [error]="getLocationError()"
           ></app-input>
         </div>
 
@@ -48,6 +54,8 @@
             formControlName="creditReason"
             type="textarea"
             placeholder="Descreva brevemente sua necessidade de crédito..."
+            [required]="true"
+            [error]="getCreditReasonError()"
           ></app-input>
         </div>
       </div>

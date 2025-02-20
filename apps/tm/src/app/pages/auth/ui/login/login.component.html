@@ -18,9 +18,9 @@
           id="username"
           type="email"
           formControlName="username"
-          placeholder="Entre com o seu email"
+          placeholder="exemplo@email.com"
           [required]="true"
-          [error]="loginForm.touched && loginForm.get('username')?.errors?.['required'] ? 'O e-mail é obrigatório' : ''"
+          [error]="getEmailError()"
         />
       </div>
 
@@ -30,9 +30,9 @@
           id="password"
           type="password"
           formControlName="password"
-          placeholder="Entre com sua senha"
+          placeholder="Digite sua senha"
           [required]="true"
-          [error]="loginForm.touched && loginForm.get('password')?.errors?.['required'] ? 'A senha é obrigatória' : ''"
+          [error]="getPasswordError()"
         />
       </div>
 
