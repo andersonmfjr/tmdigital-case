@@ -2,7 +2,9 @@
   "name": "@tm/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "serve:frontend": "nx serve tm"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~19.1.0",
