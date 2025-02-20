@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { StoreService } from '../store/store.service';
-import { LoginResponse } from '../../../pages/auth/model/auth.model';
+import { LoginResponse } from '../../model/auth.model';
 import { delay, Observable, of, throwError } from 'rxjs';
 import { Farm } from '../../model/farm.model';
 
