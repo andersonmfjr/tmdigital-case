@@ -16,12 +16,12 @@
           <span class="text-red-500">*</span>
         </label>
         <app-input
-          id="email"
+          id="username"
           type="email"
-          formControlName="email"
+          formControlName="username"
           placeholder="Entre com o seu email"
           [required]="true"
-          [error]="loginForm.touched && loginForm.get('email')?.errors?.['required'] ? 'O e-mail é obrigatório' : ''"
+          [error]="loginForm.touched && loginForm.get('username')?.errors?.['required'] ? 'O e-mail é obrigatório' : ''"
         />
       </div>
 
