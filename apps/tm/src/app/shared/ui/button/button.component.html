@@ -1,0 +1,16 @@
+<button [type]="type" [disabled]="disabled || loading" [class]="buttonClasses" (click)="onClick()">
+  <div
+    *ngIf="loading"
+    class="absolute inset-0 flex items-center justify-center"
+  >
+    <ng-icon name="lucideLoader" class="animate-spin h-5 w-5" />
+  </div>
+
+  <ng-content select="[leftIcon]"></ng-content>
+
+  <span [class.opacity-0]="loading">
+    <ng-content></ng-content>
+  </span>
+
+  <ng-content select="[rightIcon]"></ng-content>
+</button>
