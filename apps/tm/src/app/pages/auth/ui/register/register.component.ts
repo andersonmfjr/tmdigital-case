@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent } from '../../../../shared/ui/input/input.component';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -26,9 +26,22 @@ export class RegisterComponent {
     ]),
   });
 
-  onSubmit() {
+  isLoading = false;
+  router = inject(Router);
+
+  async onSubmit() {
     if (this.registerForm.valid) {
-      console.log('Form submitted', this.registerForm.value);
+      this.isLoading = true;
+      
+      try {
+        await new Promise(resolve => setTimeout(resolve, 4000));
+        
+        await this.router.navigateByUrl('/auth/login');
+      } catch (error) {
+        console.error('Erro ao fazer cadastro:', error);
+      } finally {
+        this.isLoading = false;
+      }
     }
   }
 

@@ -66,8 +66,8 @@
           variant="primary"
           size="md"
           [fullWidth]="true"
-          [disabled]="registerForm.invalid"
-          [loading]="false"
+          [disabled]="registerForm.invalid || isLoading"
+          [loading]="isLoading"
         >
           Criar conta
         </app-button>

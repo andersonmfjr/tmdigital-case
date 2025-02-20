@@ -1,6 +1,4 @@
 import { Route } from '@angular/router';
-import { LoginComponent } from '../pages/auth/ui/login/login.component';
-import { RegisterComponent } from '../pages/auth/ui/register/register.component';
 import { authGuard } from '../pages/auth/lib/auth/auth.guard';
 
 export const appRoutes: Route[] = [
@@ -9,15 +7,20 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: 'login',
-        component: LoginComponent,
+        loadComponent: () => import('../pages/auth/ui/login/login.component').then(m => m.LoginComponent),
         canActivate: [authGuard],
-      },      
+      },
       {
         path: 'register',
-        component: RegisterComponent,
+        loadComponent: () => import('../pages/auth/ui/register/register.component').then(m => m.RegisterComponent),
         canActivate: [authGuard],
       },
     ]
+  },
+  {
+    path: 'onboarding',
+    loadComponent: () => import('../pages/onboarding/ui/onboarding.component').then(m => m.OnboardingComponent),
+    canActivate: [authGuard],
   },
   {
     path: '**',

@@ -9,17 +9,33 @@
   </label>
 
   <div class="relative">
-    <input
-      [id]="id"
-      [type]="type"
-      [value]="value"
-      [placeholder]="placeholder"
-      [disabled]="disabled"
-      [required]="required"
-      [class]="inputClasses"
-      (input)="onInput($event)"
-      (blur)="onTouched()"
-    />
+    <ng-container [ngSwitch]="type">
+      <textarea
+        *ngSwitchCase="'textarea'"
+        [id]="id"
+        [value]="value"
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+        [required]="required"
+        [class]="inputClasses"
+        (input)="onInput($event)"
+        (blur)="onTouched()"
+        rows="4"
+      ></textarea>
+
+      <input
+        *ngSwitchDefault
+        [id]="id"
+        [type]="type"
+        [value]="value"
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+        [required]="required"
+        [class]="inputClasses"
+        (input)="onInput($event)"
+        (blur)="onTouched()"
+      />
+    </ng-container>
 
     <div
       *ngIf="error"

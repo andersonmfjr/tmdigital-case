@@ -1,0 +1,67 @@
+<div
+  class="min-h-screen flex items-center justify-center p-4 md:p-8 bg-background-500"
+>
+  <div
+    class="w-full max-w-4xl bg-white rounded-2xl shadow-lg p-6 md:p-10"
+    [@containerAnimation]
+  >
+    <div class="flex justify-center mb-4">
+      <img src="assets/tm.webp" alt="TM Logo" class="h-8" />
+    </div>
+
+    <div class="text-center mb-10" [@titleAnimation]>
+      <h1 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-2">
+        Boas vindas ao <span class="text-green-600 font-bold">tmdigital</span>!
+      </h1>
+      <p class="text-gray-600 text-lg">
+        Para personalizar sua experiência, precisamos de algumas informações
+        sobre sua propriedade
+      </p>
+    </div>
+
+    <form [formGroup]="onboardingForm" (ngSubmit)="onSubmit()" [@formFields]>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <app-input
+          label="Nome da Propriedade"
+          formControlName="propertyName"
+          placeholder="Ex: Fazenda São João"
+        ></app-input>
+
+        <app-input
+          label="Setor Principal"
+          formControlName="sector"
+          placeholder="Ex: Agricultura, Pecuária"
+        ></app-input>
+
+        <div class="md:col-span-2">
+          <app-input
+            label="Localização"
+            formControlName="location"
+            placeholder="Cidade/Estado e como chegar"
+            type="textarea"
+          ></app-input>
+        </div>
+
+        <div class="md:col-span-2">
+          <app-input
+            label="Por que você precisa de crédito?"
+            formControlName="creditReason"
+            type="textarea"
+            placeholder="Descreva brevemente sua necessidade de crédito..."
+          ></app-input>
+        </div>
+      </div>
+
+      <div class="flex mt-8" [@buttonAnimation]>
+        <app-button
+          size="md"
+          type="submit"
+          [disabled]="onboardingForm.invalid || isLoading"
+          [loading]="isLoading"
+        >
+          Continuar
+        </app-button>
+      </div>
+    </form>
+  </div>
+</div>
