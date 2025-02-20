@@ -1,7 +1,9 @@
-<div class="min-h-screen bg-background-500 flex items-center justify-center p-4">
+<div
+  class="min-h-screen bg-background-500 flex items-center justify-center p-4"
+>
   <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6 space-y-6">
     <div class="flex justify-start">
-      <img src="assets/tm.webp" alt="TM Logo" class="h-8">
+      <img src="assets/tm.webp" alt="TM Logo" class="h-8" />
     </div>
 
     <div class="space-y-2">
@@ -10,12 +12,9 @@
     </div>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
-      <div class="space-y-2">
-        <label for="email" class="block text-sm font-medium text-gray-700">
-          E-mail
-          <span class="text-red-500">*</span>
-        </label>
+      <div>
         <app-input
+          label="E-mail"
           id="username"
           type="email"
           formControlName="username"
@@ -25,12 +24,9 @@
         />
       </div>
 
-      <div class="space-y-2">
-        <label for="password" class="block text-sm font-medium text-gray-700">
-          Senha
-          <span class="text-red-500">*</span>
-        </label>
+      <div>
         <app-input
+          label="Senha"
           id="password"
           type="password"
           formControlName="password"
@@ -57,6 +53,15 @@
         >
           Entrar
         </app-button>
+      </div>
+
+      <div class="text-center">
+        <a
+          routerLink="/auth/register"
+          class="text-sm text-brand-500 hover:text-brand-600 cursor-pointer"
+        >
+          Não possui uma conta? Crie uma agora
+        </a>
       </div>
     </form>
   </div>

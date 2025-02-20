@@ -1,0 +1,90 @@
+<div
+  class="min-h-screen bg-background-500 flex items-center justify-center p-4"
+>
+  <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6 space-y-6">
+    <div class="flex justify-start">
+      <img src="assets/tm.webp" alt="TM Logo" class="h-8" />
+    </div>
+
+    <div class="space-y-2">
+      <h1 class="text-2xl font-semibold text-gray-900">Criar Conta</h1>
+      <p class="text-gray-600">Financiamento e serviços tecnológicos.</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div>
+        <app-input
+          label="Nome"
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Digite seu nome completo"
+          [required]="true"
+          [error]="registerForm.touched && registerForm.get('name')?.errors?.['required'] ? 'O nome é obrigatório' : ''"
+        />
+      </div>
+
+      <div>
+        <app-input
+          label="E-mail"
+          id="username"
+          type="email"
+          formControlName="username"
+          placeholder="Digite seu email"
+          [required]="true"
+          [error]="registerForm.touched && registerForm.get('username')?.errors?.['required'] ? 'O e-mail é obrigatório' : ''"
+        />
+      </div>
+
+      <div>
+        <app-input
+          label="Senha"
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Crie uma senha"
+          [required]="true"
+          [error]="registerForm.touched && registerForm.get('password')?.errors?.['required'] ? 'A senha é obrigatória' : ''"
+        />
+      </div>
+
+      <div>
+        <app-input
+          label="Confirmar senha"
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Confirme sua senha"
+          [required]="true"
+          [error]="registerForm.touched && registerForm.get('confirmPassword')?.errors?.['passwordMismatch'] ? 'As senhas não são iguais' : ''"
+        />
+      </div>
+
+      <div>
+        <app-button
+          type="submit"
+          variant="primary"
+          size="md"
+          [fullWidth]="true"
+          [disabled]="registerForm.invalid"
+          [loading]="false"
+        >
+          Criar conta
+        </app-button>
+      </div>
+
+      <div class="text-center">
+        <a
+          routerLink="/auth/login"
+          class="text-sm text-brand-500 hover:text-brand-600 cursor-pointer"
+        >
+          Já possui uma conta? Faça login
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="absolute bottom-4 w-full text-center text-white text-sm">
+  © {{ currentYear }} TerraMagna. Todos os direitos reservados.
+</div>
