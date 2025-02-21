@@ -5,12 +5,12 @@ import { InputComponent } from '../../../../shared/ui/input/input.component';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../shared/lib/auth/auth.service';
+import { AuthContainerComponent } from '../auth-container/auth-container.component';
 
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonComponent, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonComponent, RouterLink, AuthContainerComponent],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
 })
 export class RegisterComponent {
   registerForm = new FormGroup({
@@ -40,8 +40,8 @@ export class RegisterComponent {
       this.authService.register({ name: name as string, username: username as string, password: password as string }).subscribe({
         next: () => this.router.navigateByUrl('/auth/login'),
         error: (error) => {
-          this.isLoading = false;
           console.error('Erro ao fazer cadastro:', error);
+          this.isLoading = false;
         },
       });
     }
@@ -87,9 +87,5 @@ export class RegisterComponent {
     }
 
     return undefined;
-  }
-
-  get currentYear() {
-    return new Date().getFullYear();
   }
 }

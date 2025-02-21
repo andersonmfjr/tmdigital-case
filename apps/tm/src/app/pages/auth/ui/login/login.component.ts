@@ -5,13 +5,13 @@ import { InputComponent } from '../../../../shared/ui/input/input.component';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../shared/lib/auth/auth.service';
+import { AuthContainerComponent } from '../auth-container/auth-container.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonComponent, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonComponent, RouterLink, AuthContainerComponent],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {
@@ -67,9 +67,5 @@ export class LoginComponent {
     }
 
     return undefined;
-  }
-
-  get currentYear() {
-    return new Date().getFullYear();
   }
 }

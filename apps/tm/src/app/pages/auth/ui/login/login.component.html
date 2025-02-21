@@ -1,16 +1,7 @@
-<div
-  class="min-h-screen bg-background-500 flex items-center justify-center p-4"
+<app-auth-container
+  title="Plataforma TM"
+  description="Financiamento e serviços tecnológicos."
 >
-  <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6 space-y-6">
-    <div class="flex justify-start">
-      <img src="assets/tm.webp" alt="TM Logo" class="h-8" />
-    </div>
-
-    <div class="space-y-2">
-      <h1 class="text-2xl font-semibold text-gray-900">Plataforma TM</h1>
-      <p class="text-gray-600">Financiamento e serviços tecnológicos.</p>
-    </div>
-
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
       <div>
         <app-input
@@ -63,10 +54,5 @@
           Não possui uma conta? Crie uma agora
         </a>
       </div>
-    </form>
-  </div>
-</div>
-
-<div class="absolute bottom-4 w-full text-center text-white text-sm">
-  © {{ currentYear }} TerraMagna. Todos os direitos reservados.
-</div>
+  </form>
+</app-auth-container>

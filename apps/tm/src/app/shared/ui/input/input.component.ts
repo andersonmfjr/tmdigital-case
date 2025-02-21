@@ -24,7 +24,7 @@ import { InputType } from '../../model/input.model';
   styleUrl: './input.component.css',
 })
 export class InputComponent implements ControlValueAccessor {
-  @Input() id: string = crypto.randomUUID();
+  @Input() id = '' + Math.random() + Math.random();
   @Input() label?: string;
   @Input() type: InputType = 'text';
   @Input() placeholder = '';

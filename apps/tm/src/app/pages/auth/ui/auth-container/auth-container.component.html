@@ -1,0 +1,20 @@
+<div
+  class="min-h-screen bg-background-500 flex items-center justify-center p-4"
+>
+  <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6 space-y-6">
+    <div class="flex justify-start">
+      <img src="assets/tm.webp" alt="TM Logo" class="h-8" />
+    </div>
+
+    <div class="space-y-2">
+      <h1 class="text-2xl font-semibold text-gray-900">{{ title }}</h1>
+      <p class="text-gray-600">{{ description }}</p>
+    </div>
+
+    <ng-content></ng-content>
+  </div>
+</div>
+
+<div class="absolute bottom-4 w-full text-center text-white text-sm">
+  © {{ currentYear }} TerraMagna. Todos os direitos reservados.
+</div>
