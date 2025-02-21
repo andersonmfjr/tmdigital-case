@@ -19,18 +19,21 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     mockAuthService = {
-      login: jest.fn()
+      login: jest.fn(),
     } as unknown as jest.Mocked<AuthService>;
 
     await TestBed.configureTestingModule({
-      imports: [LoginComponent, ReactiveFormsModule,
+      imports: [
+        LoginComponent,
+        ReactiveFormsModule,
         InputComponent,
         ButtonComponent,
-        AuthContainerComponent],
+        AuthContainerComponent,
+      ],
       providers: [
         provideRouter(appRoutes),
         { provide: AuthService, useValue: mockAuthService },
-      ]
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
@@ -71,43 +74,58 @@ describe('LoginComponent', () => {
     beforeEach(() => {
       component.loginForm.setValue({
         username: 'teste@email.com',
-        password: 'senha123'
+        password: 'senha123',
       });
     });
 
     it('should navigate to credit-analysis when user has completed onboarding', () => {
       const routerSpy = jest.spyOn(component.router, 'navigateByUrl');
-      mockAuthService.login.mockReturnValue(of({
-        user: { hasCompletedOnboarding: true }
-      } as unknown as LoginResponse));
+      mockAuthService.login.mockReturnValue(
+        of({
+          user: { hasCompletedOnboarding: true },
+        } as unknown as LoginResponse)
+      );
 
       component.onSubmit();
 
-      expect(mockAuthService.login).toHaveBeenCalledWith('teste@email.com', 'senha123');
+      expect(mockAuthService.login).toHaveBeenCalledWith(
+        'teste@email.com',
+        'senha123'
+      );
       expect(routerSpy).toHaveBeenCalledWith('/credit-analysis');
       expect(component.isLoading).toBeFalsy();
     });
 
     it('should navigate to onboarding when user has not completed onboarding', () => {
       const routerSpy = jest.spyOn(component.router, 'navigateByUrl');
-      mockAuthService.login.mockReturnValue(of({
-        user: { hasCompletedOnboarding: false }
-      } as unknown as LoginResponse));
+      mockAuthService.login.mockReturnValue(
+        of({
+          user: { hasCompletedOnboarding: false },
+        } as unknown as LoginResponse)
+      );
 
       component.onSubmit();
 
-      expect(mockAuthService.login).toHaveBeenCalledWith('teste@email.com', 'senha123');
+      expect(mockAuthService.login).toHaveBeenCalledWith(
+        'teste@email.com',
+        'senha123'
+      );
       expect(routerSpy).toHaveBeenCalledWith('/onboarding');
       expect(component.isLoading).toBeFalsy();
     });
 
     it('should handle login error', () => {
       const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
-      mockAuthService.login.mockReturnValue(throwError(() => new Error('Login error')));
+      mockAuthService.login.mockReturnValue(
+        throwError(() => new Error('Login error'))
+      );
 
       component.onSubmit();
 
-      expect(mockAuthService.login).toHaveBeenCalledWith('teste@email.com', 'senha123');
+      expect(mockAuthService.login).toHaveBeenCalledWith(
+        'teste@email.com',
+        'senha123'
+      );
       expect(component.isLoading).toBeFalsy();
       expect(consoleErrorSpy).toHaveBeenCalled();
     });
@@ -124,7 +142,9 @@ describe('LoginComponent', () => {
   describe('UI interactions', () => {
     it('should disable submit button when form is invalid', () => {
       fixture.detectChanges();
-      const submitButton = fixture.debugElement.query(By.css('button[type="submit"]'));
+      const submitButton = fixture.debugElement.query(
+        By.css('button[type="submit"]')
+      );
 
       expect(submitButton.nativeElement.disabled).toBeTruthy();
     });
@@ -135,9 +155,11 @@ describe('LoginComponent', () => {
 
       fixture.detectChanges();
 
-      const submitButton = fixture.debugElement.query(By.css('button[type="submit"]'));
+      const submitButton = fixture.debugElement.query(
+        By.css('button[type="submit"]')
+      );
       expect(submitButton.nativeElement.disabled).toBeFalsy();
-    })
+    });
 
     it('should show error message when email is invalid', () => {
       component.loginForm.get('username')?.setValue('emailinvalido');
@@ -151,14 +173,18 @@ describe('LoginComponent', () => {
       fixture.detectChanges();
 
       const errorMessage = fixture.debugElement.query(By.css('.error-message'));
-      expect(errorMessage.nativeElement.textContent).toContain('O e-mail está inválido');
-    })
+      expect(errorMessage.nativeElement.textContent).toContain(
+        'O e-mail está inválido'
+      );
+    });
 
     it('should show error message when password is invalid', () => {
       component.loginForm.get('password')?.setValue('');
       fixture.detectChanges();
 
-      const passwordInput = fixture.debugElement.query(By.css('input[type="password"]'));
+      const passwordInput = fixture.debugElement.query(
+        By.css('input[type="password"]')
+      );
       passwordInput.nativeElement.dispatchEvent(new Event('input'));
       passwordInput.nativeElement.dispatchEvent(new Event('blur'));
 
@@ -166,7 +192,9 @@ describe('LoginComponent', () => {
 
       const errorMessage = fixture.debugElement.query(By.css('.error-message'));
       expect(errorMessage).toBeTruthy();
-      expect(errorMessage.nativeElement.textContent).toContain('A senha é obrigatória');
-    })
-  })
+      expect(errorMessage.nativeElement.textContent).toContain(
+        'A senha é obrigatória'
+      );
+    });
+  });
 });

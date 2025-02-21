@@ -6,7 +6,7 @@ import { AuthService } from '../auth/auth.service';
 const DELAY = 3000;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FarmService {
   private readonly STORAGE_KEY = 'farms';
@@ -21,7 +21,7 @@ export class FarmService {
 
     return of(farm).pipe(delay(DELAY));
   }
-  
+
   private getFarms(): Farm[] {
     const farmsJson = localStorage.getItem(this.STORAGE_KEY);
     return farmsJson ? JSON.parse(farmsJson) : [];

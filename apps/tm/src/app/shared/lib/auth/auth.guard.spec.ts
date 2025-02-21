@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
-import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {
+  Router,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { AuthService } from './auth.service';
 import { authGuard } from './auth.guard';
 
@@ -33,7 +37,10 @@ describe('authGuard', () => {
     });
   });
 
-  const runGuard = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+  const runGuard = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ) => {
     return TestBed.runInInjectionContext(() => authGuard(route, state));
   };
 
@@ -41,7 +48,9 @@ describe('authGuard', () => {
     stateSnapshot.url = '/onboarding';
     authService.isAuthenticated.mockReturnValue(true);
     authService.getHasCompletedOnboarding.mockReturnValue(true);
-    router.createUrlTree.mockReturnValue({ toString: () => '/credit-analysis' } as any);
+    router.createUrlTree.mockReturnValue({
+      toString: () => '/credit-analysis',
+    } as any);
 
     const result = runGuard(routeSnapshot, stateSnapshot);
 
@@ -53,8 +62,10 @@ describe('authGuard', () => {
     stateSnapshot.url = '/credit-analysis';
     authService.isAuthenticated.mockReturnValue(true);
     authService.getHasCompletedOnboarding.mockReturnValue(false);
-    router.createUrlTree.mockReturnValue({ toString: () => '/onboarding' } as any);
-    
+    router.createUrlTree.mockReturnValue({
+      toString: () => '/onboarding',
+    } as any);
+
     const result = runGuard(routeSnapshot, stateSnapshot);
 
     expect(router.createUrlTree).toHaveBeenCalledWith(['/onboarding']);
@@ -64,7 +75,9 @@ describe('authGuard', () => {
   it('should redirect unauthenticated user to login page when accessing protected route', () => {
     stateSnapshot.url = '/protected-route';
     authService.isAuthenticated.mockReturnValue(false);
-    router.createUrlTree.mockReturnValue({ toString: () => '/auth/login' } as any);
+    router.createUrlTree.mockReturnValue({
+      toString: () => '/auth/login',
+    } as any);
 
     const result = runGuard(routeSnapshot, stateSnapshot);
 
@@ -85,8 +98,10 @@ describe('authGuard', () => {
     stateSnapshot.url = '/auth/login';
     authService.isAuthenticated.mockReturnValue(true);
     authService.getHasCompletedOnboarding.mockReturnValue(true);
-    router.createUrlTree.mockReturnValue({ toString: () => '/credit-analysis' } as any);
-    
+    router.createUrlTree.mockReturnValue({
+      toString: () => '/credit-analysis',
+    } as any);
+
     const result = runGuard(routeSnapshot, stateSnapshot);
 
     expect(router.createUrlTree).toHaveBeenCalledWith(['/credit-analysis']);
@@ -97,7 +112,9 @@ describe('authGuard', () => {
     stateSnapshot.url = '/auth/login';
     authService.isAuthenticated.mockReturnValue(true);
     authService.getHasCompletedOnboarding.mockReturnValue(false);
-    router.createUrlTree.mockReturnValue({ toString: () => '/onboarding' } as any);
+    router.createUrlTree.mockReturnValue({
+      toString: () => '/onboarding',
+    } as any);
 
     const result = runGuard(routeSnapshot, stateSnapshot);
 

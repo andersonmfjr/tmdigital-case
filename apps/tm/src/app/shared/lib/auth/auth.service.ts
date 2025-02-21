@@ -7,7 +7,7 @@ import { Farm } from '../../model/farm.model';
 const DELAY = 3000;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private readonly ACCESS_TOKEN_KEY = 'access_token';
@@ -27,10 +27,14 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<LoginResponse> {
-    const currentUsers = this.storageService.getItem(this.REGISTERED_KEY) || '[]';
+    const currentUsers =
+      this.storageService.getItem(this.REGISTERED_KEY) || '[]';
     const users = JSON.parse(currentUsers);
 
-    const user = users.find((user: { username: string, password: string }) => user.username === username && user.password === password);
+    const user = users.find(
+      (user: { username: string; password: string }) =>
+        user.username === username && user.password === password
+    );
 
     if (!user) {
       return throwError(() => new Error('Verifique as credenciais informadas'));
@@ -47,25 +51,47 @@ export class AuthService {
         id: user.id,
         username: user.username,
         name: user.name,
-        hasCompletedOnboarding: farm ? true : false
-      }
+        hasCompletedOnboarding: farm ? true : false,
+      },
     };
 
-    this.storageService.setItem(this.ACCESS_TOKEN_KEY, mockResponse.access_token);
-    this.storageService.setItem(this.USER_KEY, JSON.stringify(mockResponse.user));
+    this.storageService.setItem(
+      this.ACCESS_TOKEN_KEY,
+      mockResponse.access_token
+    );
+    this.storageService.setItem(
+      this.USER_KEY,
+      JSON.stringify(mockResponse.user)
+    );
 
     return of(mockResponse).pipe(delay(DELAY));
   }
 
-  register({ username, name, password }: { username: string, name: string, password: string }): Observable<boolean> {
-    const currentUsers = this.storageService.getItem(this.REGISTERED_KEY) || '[]';
+  register({
+    username,
+    name,
+    password,
+  }: {
+    username: string;
+    name: string;
+    password: string;
+  }): Observable<boolean> {
+    const currentUsers =
+      this.storageService.getItem(this.REGISTERED_KEY) || '[]';
     const users = JSON.parse(currentUsers);
 
-    if (users.some((user: { username: string}) => user.username === username)) {
+    if (
+      users.some((user: { username: string }) => user.username === username)
+    ) {
       return throwError(() => new Error('Usuário já cadastrado'));
     }
 
-    users.push({ username, name, password, id: 'mock_id_' + (users.length + 1) });
+    users.push({
+      username,
+      name,
+      password,
+      id: 'mock_id_' + (users.length + 1),
+    });
     this.storageService.setItem(this.REGISTERED_KEY, JSON.stringify(users));
 
     return of(true).pipe(delay(DELAY));

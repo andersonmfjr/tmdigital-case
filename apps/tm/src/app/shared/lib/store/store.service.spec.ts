@@ -41,7 +41,7 @@ describe('StoreService', () => {
       service.setItem('key2', 'value2');
 
       service.clear();
-      
+
       expect(service.getItem('key1')).toBeNull();
       expect(service.getItem('key2')).toBeNull();
     });

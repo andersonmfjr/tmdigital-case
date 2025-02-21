@@ -6,7 +6,7 @@ import { Observable, of, delay } from 'rxjs';
 const DELAY = 3000;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OnboardingService {
   private readonly STORAGE_KEY = 'farms';
@@ -16,11 +16,11 @@ export class OnboardingService {
 
   saveFarm(farmData: Omit<Farm, 'id' | 'userId'>): Observable<Farm> {
     const farms = this.getFarms();
-    
+
     const newFarm: Farm = {
       id: 'mock_id_' + (farms.length + 1),
       userId: this.getCurrentUserId(),
-      ...farmData
+      ...farmData,
     };
 
     const user = this.authService.getUser();
@@ -29,7 +29,7 @@ export class OnboardingService {
 
     farms.push(newFarm);
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(farms));
-    
+
     return of(newFarm).pipe(delay(DELAY));
   }
 

@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { 
-  ActivatedRouteSnapshot, 
-  RouterStateSnapshot, 
-  UrlTree 
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
 } from '@angular/router';
 
 export const authGuard = (
@@ -14,11 +14,19 @@ export const authGuard = (
   const router = inject(Router);
   const authService = inject(AuthService);
 
-  if (authService.isAuthenticated() && state.url.includes('onboarding') && authService.getHasCompletedOnboarding()) {
+  if (
+    authService.isAuthenticated() &&
+    state.url.includes('onboarding') &&
+    authService.getHasCompletedOnboarding()
+  ) {
     return router.createUrlTree(['/credit-analysis']);
   }
 
-  if (authService.isAuthenticated() && state.url.includes('credit-analysis') && !authService.getHasCompletedOnboarding()) {
+  if (
+    authService.isAuthenticated() &&
+    state.url.includes('credit-analysis') &&
+    !authService.getHasCompletedOnboarding()
+  ) {
     return router.createUrlTree(['/onboarding']);
   }
 
@@ -30,7 +38,10 @@ export const authGuard = (
     return true;
   }
 
-  if (state.url.includes('/auth/login') || state.url.includes('/auth/register')) {
+  if (
+    state.url.includes('/auth/login') ||
+    state.url.includes('/auth/register')
+  ) {
     if (authService.getHasCompletedOnboarding()) {
       return router.createUrlTree(['/credit-analysis']);
     }

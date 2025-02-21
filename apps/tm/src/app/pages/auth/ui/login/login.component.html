@@ -2,57 +2,57 @@
   title="Plataforma TM"
   description="Financiamento e serviços tecnológicos."
 >
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
-      <div>
-        <app-input
-          label="E-mail"
-          id="username"
-          type="email"
-          formControlName="username"
-          placeholder="exemplo@email.com"
-          [required]="true"
-          [error]="getEmailError()"
-        />
-      </div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <app-input
+        label="E-mail"
+        id="username"
+        type="email"
+        formControlName="username"
+        placeholder="exemplo@email.com"
+        [required]="true"
+        [error]="getEmailError()"
+      />
+    </div>
 
-      <div>
-        <app-input
-          label="Senha"
-          id="password"
-          type="password"
-          formControlName="password"
-          placeholder="Digite sua senha"
-          [required]="true"
-          [error]="getPasswordError()"
-        />
-      </div>
+    <div>
+      <app-input
+        label="Senha"
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="Digite sua senha"
+        [required]="true"
+        [error]="getPasswordError()"
+      />
+    </div>
 
-      <div class="flex justify-end">
-        <a href="#" class="text-sm text-brand-500 hover:text-brand-600">
-          Esqueceu sua senha?
-        </a>
-      </div>
+    <div class="flex justify-end">
+      <a href="#" class="text-sm text-brand-500 hover:text-brand-600">
+        Esqueceu sua senha?
+      </a>
+    </div>
 
-      <div>
-        <app-button
-          type="submit"
-          variant="primary"
-          size="md"
-          [fullWidth]="true"
-          [disabled]="loginForm.invalid || isLoading"
-          [loading]="isLoading"
-        >
-          Entrar
-        </app-button>
-      </div>
+    <div>
+      <app-button
+        type="submit"
+        variant="primary"
+        size="md"
+        [fullWidth]="true"
+        [disabled]="loginForm.invalid || isLoading"
+        [loading]="isLoading"
+      >
+        Entrar
+      </app-button>
+    </div>
 
-      <div class="text-center">
-        <a
-          routerLink="/auth/register"
-          class="text-sm text-brand-500 hover:text-brand-600 cursor-pointer"
-        >
-          Não possui uma conta? Crie uma agora
-        </a>
-      </div>
+    <div class="text-center">
+      <a
+        routerLink="/auth/register"
+        class="text-sm text-brand-500 hover:text-brand-600 cursor-pointer"
+      >
+        Não possui uma conta? Crie uma agora
+      </a>
+    </div>
   </form>
 </app-auth-container>

@@ -2,75 +2,75 @@
   title="Criar conta"
   description="Financiamento e serviços tecnológicos."
 >
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
-      <div>
-        <app-input
-          label="Nome"
-          id="name"
-          type="text"
-          formControlName="name"
-          placeholder="Digite seu nome completo"
-          [required]="true"
-          [error]="getNameError()"
-        />
-      </div>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <app-input
+        label="Nome"
+        id="name"
+        type="text"
+        formControlName="name"
+        placeholder="Digite seu nome completo"
+        [required]="true"
+        [error]="getNameError()"
+      />
+    </div>
 
-      <div>
-        <app-input
-          label="E-mail"
-          id="username"
-          type="email"
-          formControlName="username"
-          placeholder="exemplo@email.com"
-          [required]="true"
-          [error]="getEmailError()"
-        />
-      </div>
+    <div>
+      <app-input
+        label="E-mail"
+        id="username"
+        type="email"
+        formControlName="username"
+        placeholder="exemplo@email.com"
+        [required]="true"
+        [error]="getEmailError()"
+      />
+    </div>
 
-      <div>
-        <app-input
-          label="Senha"
-          id="password"
-          type="password"
-          formControlName="password"
-          placeholder="Digite sua senha"
-          [required]="true"
-          [error]="getPasswordError()"
-        />
-      </div>
+    <div>
+      <app-input
+        label="Senha"
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="Digite sua senha"
+        [required]="true"
+        [error]="getPasswordError()"
+      />
+    </div>
 
-      <div>
-        <app-input
-          label="Confirmar senha"
-          id="confirmPassword"
-          type="password"
-          formControlName="confirmPassword"
-          placeholder="Confirme sua senha"
-          [required]="true"
-          [error]="getConfirmPasswordError()"
-        />
-      </div>
+    <div>
+      <app-input
+        label="Confirmar senha"
+        id="confirmPassword"
+        type="password"
+        formControlName="confirmPassword"
+        placeholder="Confirme sua senha"
+        [required]="true"
+        [error]="getConfirmPasswordError()"
+      />
+    </div>
 
-      <div>
-        <app-button
-          type="submit"
-          variant="primary"
-          size="md"
-          [fullWidth]="true"
-          [disabled]="registerForm.invalid || isLoading"
-          [loading]="isLoading"
-        >
-          Criar conta
-        </app-button>
-      </div>
+    <div>
+      <app-button
+        type="submit"
+        variant="primary"
+        size="md"
+        [fullWidth]="true"
+        [disabled]="registerForm.invalid || isLoading"
+        [loading]="isLoading"
+      >
+        Criar conta
+      </app-button>
+    </div>
 
-      <div class="text-center">
-        <a
-          routerLink="/auth/login"
-          class="text-sm text-brand-500 hover:text-brand-600 cursor-pointer"
-        >
-          Já possui uma conta? Faça login
-        </a>
-      </div>
-    </form>
+    <div class="text-center">
+      <a
+        routerLink="/auth/login"
+        class="text-sm text-brand-500 hover:text-brand-600 cursor-pointer"
+      >
+        Já possui uma conta? Faça login
+      </a>
+    </div>
+  </form>
 </app-auth-container>

@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "serve:frontend": "nx serve tm"
+    "serve:frontend": "nx serve tm",
+    "prettier:format": "prettier . --write",
+    "frontend:lint": "nx run tm:lint --fix"
   },
   "private": true,
   "dependencies": {

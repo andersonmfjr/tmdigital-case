@@ -17,7 +17,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(async () => {
     mockAuthService = {
-      register: jest.fn()
+      register: jest.fn(),
     } as unknown as jest.Mocked<AuthService>;
 
     await TestBed.configureTestingModule({
@@ -26,12 +26,12 @@ describe('RegisterComponent', () => {
         ReactiveFormsModule,
         InputComponent,
         ButtonComponent,
-        AuthContainerComponent
+        AuthContainerComponent,
       ],
       providers: [
         provideRouter(appRoutes),
-        { provide: AuthService, useValue: mockAuthService }
-      ]
+        { provide: AuthService, useValue: mockAuthService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RegisterComponent);
@@ -57,7 +57,7 @@ describe('RegisterComponent', () => {
     it('should validate required email', () => {
       const emailControl = component.registerForm.get('username');
       emailControl?.markAsTouched();
-      
+
       expect(component.getEmailError()).toBe('O e-mail é obrigatório');
     });
 
@@ -78,13 +78,16 @@ describe('RegisterComponent', () => {
 
     it('should validate password confirmation match', () => {
       const passwordControl = component.registerForm.get('password');
-      const confirmPasswordControl = component.registerForm.get('confirmPassword');
-      
+      const confirmPasswordControl =
+        component.registerForm.get('confirmPassword');
+
       passwordControl?.setValue('senha123');
       confirmPasswordControl?.setValue('senha456');
       confirmPasswordControl?.markAsTouched();
 
-      expect(component.getConfirmPasswordError()).toBe('As senhas não coincidem');
+      expect(component.getConfirmPasswordError()).toBe(
+        'As senhas não coincidem'
+      );
     });
   });
 
@@ -94,7 +97,7 @@ describe('RegisterComponent', () => {
         name: 'Usuário Teste',
         username: 'teste@email.com',
         password: 'senha123',
-        confirmPassword: 'senha123'
+        confirmPassword: 'senha123',
       });
     });
 
@@ -107,14 +110,16 @@ describe('RegisterComponent', () => {
       expect(mockAuthService.register).toHaveBeenCalledWith({
         name: 'Usuário Teste',
         username: 'teste@email.com',
-        password: 'senha123'
+        password: 'senha123',
       });
       expect(routerSpy).toHaveBeenCalledWith('/auth/login');
     });
 
     it('should handle registration error', () => {
       const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
-      mockAuthService.register.mockReturnValue(throwError(() => new Error('Register error')));
+      mockAuthService.register.mockReturnValue(
+        throwError(() => new Error('Register error'))
+      );
 
       component.onSubmit();
 
@@ -136,7 +141,9 @@ describe('RegisterComponent', () => {
     it('should disable submit button when form is invalid', () => {
       fixture.detectChanges();
 
-      const submitButton = fixture.debugElement.query(By.css('button[type="submit"]'));
+      const submitButton = fixture.debugElement.query(
+        By.css('button[type="submit"]')
+      );
       expect(submitButton.nativeElement.disabled).toBeTruthy();
     });
 
@@ -145,12 +152,14 @@ describe('RegisterComponent', () => {
         name: 'Usuário Teste',
         username: 'teste@email.com',
         password: 'senha123',
-        confirmPassword: 'senha123'
+        confirmPassword: 'senha123',
       });
 
       fixture.detectChanges();
 
-      const submitButton = fixture.debugElement.query(By.css('button[type="submit"]'));
+      const submitButton = fixture.debugElement.query(
+        By.css('button[type="submit"]')
+      );
       expect(submitButton.nativeElement.disabled).toBeFalsy();
     });
 
@@ -163,7 +172,9 @@ describe('RegisterComponent', () => {
       fixture.detectChanges();
 
       const errorMessage = fixture.debugElement.query(By.css('.error-message'));
-      expect(errorMessage.nativeElement.textContent).toContain('O nome é obrigatório');
+      expect(errorMessage.nativeElement.textContent).toContain(
+        'O nome é obrigatório'
+      );
     });
 
     it('should show error message when passwords do not match', () => {
@@ -172,14 +183,18 @@ describe('RegisterComponent', () => {
 
       fixture.detectChanges();
 
-      const confirmPasswordInput = fixture.debugElement.query(By.css('input[id="confirmPassword"]'));
+      const confirmPasswordInput = fixture.debugElement.query(
+        By.css('input[id="confirmPassword"]')
+      );
       confirmPasswordInput.nativeElement.dispatchEvent(new Event('input'));
       confirmPasswordInput.nativeElement.dispatchEvent(new Event('blur'));
 
       fixture.detectChanges();
 
       const errorMessage = fixture.debugElement.query(By.css('.error-message'));
-      expect(errorMessage.nativeElement.textContent).toContain('As senhas não coincidem');
+      expect(errorMessage.nativeElement.textContent).toContain(
+        'As senhas não coincidem'
+      );
     });
   });
 });

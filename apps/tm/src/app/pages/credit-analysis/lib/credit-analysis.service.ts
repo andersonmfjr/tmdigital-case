@@ -5,7 +5,7 @@ import { delay, Observable, of } from 'rxjs';
 const DELAY = 2000;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CreditAnalysisService {
   private mockAnalyses: CreditAnalysis[] = [
@@ -14,20 +14,20 @@ export class CreditAnalysisService {
       requestDate: new Date(2024, 1, 15),
       status: 'APPROVED',
       finishDate: new Date(2024, 1, 20),
-      approvedAmount: 150000
+      approvedAmount: 150000,
     },
     {
       id: '2',
       requestDate: new Date(2024, 1, 25),
       status: 'REJECTED',
       finishDate: new Date(2024, 1, 28),
-      rejectionReason: 'Score de crédito insuficiente.'
+      rejectionReason: 'Score de crédito insuficiente.',
     },
     {
       id: '3',
       requestDate: new Date(2024, 2, 10),
-      status: 'PENDING'
-    }
+      status: 'PENDING',
+    },
   ];
 
   getAnalyses(): Observable<CreditAnalysis[]> {
@@ -38,7 +38,7 @@ export class CreditAnalysisService {
     const newAnalysis: CreditAnalysis = {
       id: Date.now().toString(),
       requestDate: new Date(),
-      status: 'PENDING'
+      status: 'PENDING',
     };
 
     this.mockAnalyses.push(newAnalysis);

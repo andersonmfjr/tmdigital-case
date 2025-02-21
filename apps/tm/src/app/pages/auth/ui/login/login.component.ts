@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { InputComponent } from '../../../../shared/ui/input/input.component';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
@@ -10,14 +15,21 @@ import { AuthContainerComponent } from '../auth-container/auth-container.compone
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonComponent, RouterLink, AuthContainerComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    InputComponent,
+    ButtonComponent,
+    RouterLink,
+    AuthContainerComponent,
+  ],
   templateUrl: './login.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
+    password: new FormControl('', [Validators.required]),
   });
 
   isLoading = false;
@@ -43,7 +55,7 @@ export class LoginComponent {
           this.isLoading = false;
           console.error('Erro ao fazer login:', error);
         },
-        complete: () => this.isLoading = false
+        complete: () => (this.isLoading = false),
       });
     }
   }

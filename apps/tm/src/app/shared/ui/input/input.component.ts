@@ -5,7 +5,6 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideFileWarning } from '@ng-icons/lucide';
 import { InputType } from '../../model/input.model';
 
-
 @Component({
   selector: 'app-input',
   imports: [CommonModule, NgIcon],
@@ -17,9 +16,11 @@ import { InputType } from '../../model/input.model';
       multi: true,
     },
   ],
-  viewProviders: [provideIcons({
-    lucideFileWarning
-  })],
+  viewProviders: [
+    provideIcons({
+      lucideFileWarning,
+    }),
+  ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
 })
@@ -37,18 +38,20 @@ export class InputComponent implements ControlValueAccessor {
   touched = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
-  onChange = (_value: string) => { };
+  onChange = (_value: string) => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onTouched = () => { };
+  onTouched = () => {};
 
   writeValue(value: string): void {
     this.value = value;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
@@ -71,14 +74,12 @@ export class InputComponent implements ControlValueAccessor {
       border 
       rounded-md 
       transition-colors
-      ${this.error
-        ? 'border-red-500 focus:ring-red-500'
-        : 'border-gray-300 focus:ring-brand-500'
+      ${
+        this.error
+          ? 'border-red-500 focus:ring-red-500'
+          : 'border-gray-300 focus:ring-brand-500'
       }
-      ${this.disabled
-        ? 'bg-gray-100 cursor-not-allowed'
-        : 'bg-white'
-      }
+      ${this.disabled ? 'bg-gray-100 cursor-not-allowed' : 'bg-white'}
       focus:outline-none 
       focus:ring-2 
       focus:border-transparent

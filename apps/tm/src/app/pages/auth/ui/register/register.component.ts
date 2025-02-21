@@ -1,6 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { InputComponent } from '../../../../shared/ui/input/input.component';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { Router, RouterLink } from '@angular/router';
@@ -9,7 +14,14 @@ import { AuthContainerComponent } from '../auth-container/auth-container.compone
 
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonComponent, RouterLink, AuthContainerComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    InputComponent,
+    ButtonComponent,
+    RouterLink,
+    AuthContainerComponent,
+  ],
   templateUrl: './register.component.html',
 })
 export class RegisterComponent {
@@ -22,8 +34,10 @@ export class RegisterComponent {
       (control) => {
         if (!control.parent) return null;
         const password = control.parent.get('password');
-        return password?.value === control.value ? null : { passwordMismatch: true };
-      }
+        return password?.value === control.value
+          ? null
+          : { passwordMismatch: true };
+      },
     ]),
   });
 
@@ -37,13 +51,19 @@ export class RegisterComponent {
 
       const { name, username, password } = this.registerForm.value;
 
-      this.authService.register({ name: name as string, username: username as string, password: password as string }).subscribe({
-        next: () => this.router.navigateByUrl('/auth/login'),
-        error: (error) => {
-          console.error('Erro ao fazer cadastro:', error);
-          this.isLoading = false;
-        },
-      });
+      this.authService
+        .register({
+          name: name as string,
+          username: username as string,
+          password: password as string,
+        })
+        .subscribe({
+          next: () => this.router.navigateByUrl('/auth/login'),
+          error: (error) => {
+            console.error('Erro ao fazer cadastro:', error);
+            this.isLoading = false;
+          },
+        });
     }
   }
 
