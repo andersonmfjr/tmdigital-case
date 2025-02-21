@@ -29,7 +29,7 @@ Para a API, foi utilizado o padrão modular do NestJS com Prisma como ORM.
 
 ## Executando o projeto
 
-Para executar o projeto, rode o seguinte comando:
+Para executar o front-end, rode o seguinte comando:
 
 ```sh
 npx nx serve tm
@@ -37,7 +37,19 @@ npx nx serve tm
 
 O front-end será executado na porta 4200.
 
-API ainda em construção. O front-end está funcionando com mock de dados.
+Para executar a API, rode o seguinte comando:
+
+```sh
+npx nx serve api
+```
+
+A API será executada na porta 3000.
+
+Também é possível executar o projeto inteiro com o seguinte comando:
+
+```sh
+npx nx run-many -t serve
+```
 
 ## Demonstração
 
