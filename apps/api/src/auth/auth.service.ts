@@ -43,7 +43,7 @@ export class AuthService {
       name,
       createdAt,
       updatedAt,
-      hadCompletedOnboarding: !!farm,
+      hasCompletedOnboarding: !!farm,
     };
 
     return {
