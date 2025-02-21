@@ -1,81 +1,59 @@
-# Tm
+# tmdigital case
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+<a alt="Terra Magna Logo" href="https://terramagna.com.br" target="_blank" rel="noreferrer"><img src="https://terramagna.com.br/wp-content/uploads/2024/05/TM_Logo_Reduzida_Monocromatica.png.webp" width="200"></a>
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Figma
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+Esse é um case baseado no seguinte Figma:
+https://www.figma.com/design/AMAxQLWrxIotqB8NVkgGdB/tmdigital?node-id=0-1&t=UeBctpz8alWA32nb-1
 
-## Finish your CI setup
+## Requisitos
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/6M0MbFX69x)
+- É necessário ter o Node.js instalado, preferencialmente a versão 20+.
+- É necessário ter o Nx instalado, preferencialmente a versão 10+.
 
-## Run tasks
+## Stack e Arquitetura
 
-To run the dev server for your app, use:
+- Nx
+- Angular 19
+- Tailwind CSS
+- NestJS
+- TypeScript
+
+Como metodologia arquitetural, foi utilizado o padrão [Feature Sliced Design](https://feature-sliced.design/) (obs: ainda estou experimentando o padrão).
+
+## Executando o projeto
+
+Para executar o projeto, rode o seguinte comando:
 
 ```sh
 npx nx serve tm
 ```
 
-To create a production bundle:
+O front-end será executado na porta 4200.
 
-```sh
-npx nx build tm
-```
+API ainda em construção. O front-end está funcionando com mock de dados.
 
-To see all available targets to run for a project, run:
+## Demonstração
 
-```sh
-npx nx show project tm
-```
+<img src="./tm-gif.gif" alt="Demonstração" />
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+Vídeo completo: https://drive.google.com/file/d/1njS6VXZ2XQkideB7Hmm7BqI0RqRIPBqi/view?usp=sharing
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## A fazer
 
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/angular:app demo
-```
-
-To generate a new library, use:
-
-```sh
-npx nx g @nx/angular:lib mylib
-```
-
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [x] Setup do projeto com Nx e dependências (Tailwind, Lucide, etc)
+- [x] Criar tela de login
+- [x] Criar tela de cadastro
+- [x] Criar tela de onboarding
+- [x] Criar tela de análise de crédito
+- [x] Navegação entre as telas
+- [x] Fluxo funcional persistindo dados do localStorage
+- [x] Criar guard de autenticação
+- [x] Testes para os componentes de autenticação
+- [ ] Testes para os componentes shared, onboarding e análise de crédito
+- [ ] Criar API (POST /user, POST /login, POST /farms, GET /credit-analysis, POST /analysis)
+- [ ] Autenticação com JWT
+- [ ] Criar testes da API
+- [ ] Atualizar serviços do Front-end de acordo com a API
+- [ ] Criar testes do Front-end para os serviços atualizados
