@@ -20,4 +20,17 @@ model User {
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  farm      Farm?
+}
+
+model Farm {
+  id            Int      @id @default(autoincrement())
+  propertyName  String
+  location      String
+  sector        String
+  creditReason  String
+  user          User     @relation(fields: [userId], references: [id])
+  userId        Int      @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
