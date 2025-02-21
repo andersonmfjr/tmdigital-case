@@ -19,8 +19,13 @@ https://www.figma.com/design/AMAxQLWrxIotqB8NVkgGdB/tmdigital?node-id=0-1&t=UeBc
 - Tailwind CSS
 - NestJS
 - TypeScript
+- NestJS
+- Prisma
+- SQLite
 
-Como metodologia arquitetural, foi utilizado o padrão [Feature Sliced Design](https://feature-sliced.design/) (obs: ainda estou experimentando o padrão).
+Como metodologia arquitetural para o front-end, foi utilizado o padrão [Feature Sliced Design](https://feature-sliced.design/) (obs: ainda estou experimentando o padrão).
+
+Para a API, foi utilizado o padrão modular do NestJS com Prisma como ORM.
 
 ## Executando o projeto
 
@@ -52,8 +57,15 @@ Vídeo completo: https://drive.google.com/file/d/1njS6VXZ2XQkideB7Hmm7BqI0RqRIPB
 - [x] Criar guard de autenticação
 - [x] Testes para os componentes de autenticação
 - [ ] Testes para os componentes shared, onboarding e análise de crédito
-- [ ] Criar API (POST /user, POST /login, POST /farms, GET /credit-analysis, POST /analysis)
-- [ ] Autenticação com JWT
+- [x] API: POST /register
+- [x] API: POST /login
+- [x] API: POST /farms
+- [x] API: GET /my-farm
+- [ ] API: POST /analysis
+- [ ] API: GET /analysis
+- [x] Autenticação com JWT
 - [ ] Criar testes da API
-- [ ] Atualizar serviços do Front-end de acordo com a API
+- [x] Integrar API com o front-end: Autenticação
+- [x] Integrar API com o front-end: Propriedade
+- [ ] Integrar API com o front-end: Análise de crédito
 - [ ] Criar testes do Front-end para os serviços atualizados

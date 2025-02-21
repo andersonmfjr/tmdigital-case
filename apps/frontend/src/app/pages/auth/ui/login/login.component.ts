@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -36,6 +41,7 @@ export class LoginComponent {
 
   router = inject(Router);
   authService = inject(AuthService);
+  cdr = inject(ChangeDetectorRef);
 
   onSubmit() {
     if (this.loginForm.valid) {
@@ -49,13 +55,14 @@ export class LoginComponent {
             return;
           }
 
+          this.isLoading = false;
           this.router.navigateByUrl('/onboarding');
         },
         error: (error) => {
           this.isLoading = false;
+          this.cdr.detectChanges();
           console.error('Erro ao fazer login:', error);
         },
-        complete: () => (this.isLoading = false),
       });
     }
   }

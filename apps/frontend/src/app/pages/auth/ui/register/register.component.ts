@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -44,6 +44,7 @@ export class RegisterComponent {
   isLoading = false;
   router = inject(Router);
   authService = inject(AuthService);
+  cdr = inject(ChangeDetectorRef);
 
   async onSubmit() {
     if (this.registerForm.valid) {
@@ -62,6 +63,7 @@ export class RegisterComponent {
           error: (error) => {
             console.error('Erro ao fazer cadastro:', error);
             this.isLoading = false;
+            this.cdr.detectChanges();
           },
         });
     }
