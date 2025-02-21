@@ -22,7 +22,10 @@
           }
         ],
         "styles": ["apps/frontend/src/styles.css"],
-        "scripts": []
+        "scripts": [],
+        "define": {
+          "API_URL": "http://localhost:3000/api"
+        }
       },
       "configurations": {
         "production": {

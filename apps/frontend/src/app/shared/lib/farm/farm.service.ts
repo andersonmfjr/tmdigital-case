@@ -1,34 +1,19 @@
 import { inject, Injectable } from '@angular/core';
 import { Farm } from '../../model/farm.model';
-import { Observable, of, delay } from 'rxjs';
-import { AuthService } from '../auth/auth.service';
-
-const DELAY = 3000;
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FarmService {
-  private readonly STORAGE_KEY = 'farms';
-
-  authService = inject(AuthService);
+  http = inject(HttpClient);
 
   getCurrentFarm(): Observable<Farm> {
-    const farms = this.getFarms();
-    const currentUserId = this.getCurrentUserId();
-
-    const farm = farms.find((farm) => farm.userId === currentUserId) as Farm;
-
-    return of(farm).pipe(delay(DELAY));
+    return this.http.get<Farm>('farms/my-farm');
   }
 
-  private getFarms(): Farm[] {
-    const farmsJson = localStorage.getItem(this.STORAGE_KEY);
-    return farmsJson ? JSON.parse(farmsJson) : [];
-  }
-
-  private getCurrentUserId(): string {
-    const user = this.authService.getUser();
-    return user.id;
+  saveFarm(farm: Omit<Farm, 'id' | 'userId'>): Observable<Farm> {
+    return this.http.post<Farm>('farms', farm);
   }
 }

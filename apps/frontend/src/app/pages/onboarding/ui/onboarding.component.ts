@@ -18,7 +18,7 @@ import {
   stagger,
   keyframes,
 } from '@angular/animations';
-import { OnboardingService } from '../lib/onboarding/onboarding.service';
+import { OnboardingService } from '../lib/onboarding.service';
 
 @Component({
   selector: 'app-onboarding',
