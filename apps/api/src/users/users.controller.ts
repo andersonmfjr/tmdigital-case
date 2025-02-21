@@ -7,9 +7,9 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Get('profile/:email')
-  async getProfile(@Param('email') email: string) {
-    const user = await this.usersService.findByUsername(email);
+  @Get('profile/:username')
+  async getProfile(@Param('username') username: string) {
+    const user = await this.usersService.findByUsername(username);
     if (user) {
       const { password, ...result } = user;
       return result;

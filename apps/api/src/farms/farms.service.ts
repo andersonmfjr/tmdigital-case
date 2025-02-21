@@ -1,4 +1,8 @@
-import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  ConflictException,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 
 @Injectable()
@@ -17,7 +21,9 @@ export class FarmsService {
     });
 
     if (existingFarm) {
-      throw new ConflictException('Usuário já possui uma propriedade registrada');
+      throw new ConflictException(
+        'Usuário já possui uma propriedade registrada'
+      );
     }
 
     return this.prisma.farm.create({
@@ -31,7 +37,9 @@ export class FarmsService {
     });
 
     if (!farm) {
-      throw new NotFoundException('Propriedade não encontrada para este usuário');
+      throw new NotFoundException(
+        'Propriedade não encontrada para este usuário'
+      );
     }
 
     return farm;

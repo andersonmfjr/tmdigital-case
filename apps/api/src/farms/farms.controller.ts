@@ -1,4 +1,12 @@
-import { Controller, Post, Get, Body, Param, UseGuards, Request } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Body,
+  Param,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { FarmsService } from './farms.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
@@ -10,12 +18,13 @@ export class FarmsController {
   @Post()
   async create(
     @Request() req,
-    @Body() createFarmDto: {
+    @Body()
+    createFarmDto: {
       propertyName: string;
       location: string;
       sector: string;
       creditReason: string;
-    },
+    }
   ) {
     return this.farmsService.create({
       userId: req.user.id,
