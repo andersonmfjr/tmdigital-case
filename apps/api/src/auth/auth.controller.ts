@@ -21,7 +21,9 @@ export class AuthController {
     @Body() registerDto: { username: string; password: string; name: string }
   ) {
     const user = await this.usersService.create(registerDto);
+
     const { password, ...result } = user;
+
     return result;
   }
 
@@ -32,9 +34,11 @@ export class AuthController {
       loginDto.username,
       loginDto.password
     );
+
     if (!user) {
       throw new UnauthorizedException('Credenciais inválidas');
     }
+
     return this.authService.login(user);
   }
 }

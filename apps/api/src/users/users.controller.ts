@@ -10,10 +10,12 @@ export class UsersController {
   @Get('profile/:username')
   async getProfile(@Param('username') username: string) {
     const user = await this.usersService.findByUsername(username);
+
     if (user) {
       const { password, ...result } = user;
       return result;
     }
+
     return null;
   }
 }
