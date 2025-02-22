@@ -8,7 +8,7 @@ import {
 import { AuthService } from './auth.service';
 import { authGuard } from './auth.guard';
 
-describe('authGuard', () => {
+describe('AuthGuard', () => {
   let router: jest.Mocked<Router>;
   let authService: jest.Mocked<AuthService>;
   let routeSnapshot: ActivatedRouteSnapshot;

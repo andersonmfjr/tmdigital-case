@@ -19,7 +19,7 @@ describe('AuthContainerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display the title', () => {
+  it('should display title', () => {
     const title = 'Test Title';
     component.title = title;
     fixture.detectChanges();
@@ -28,7 +28,7 @@ describe('AuthContainerComponent', () => {
     expect(element.textContent).toContain(title);
   });
 
-  it('should display the description', () => {
+  it('should display description', () => {
     const description = 'Test Description';
     component.description = description;
     fixture.detectChanges();
@@ -37,7 +37,7 @@ describe('AuthContainerComponent', () => {
     expect(element.textContent).toContain(description);
   });
 
-  it('should display the current year', () => {
+  it('should display current year', () => {
     const currentYear = new Date().getFullYear().toString();
     fixture.detectChanges();
     const yearElement = fixture.nativeElement.querySelector('.text-white');
