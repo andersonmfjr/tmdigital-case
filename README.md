@@ -57,7 +57,7 @@ npx nx run-many -t serve
 
 Vídeo completo: https://drive.google.com/file/d/1njS6VXZ2XQkideB7Hmm7BqI0RqRIPBqi/view?usp=sharing
 
-## A fazer
+## TODO List
 
 - [x] Setup do projeto com Nx e dependências (Tailwind, Lucide, etc)
 - [x] Criar tela de login
