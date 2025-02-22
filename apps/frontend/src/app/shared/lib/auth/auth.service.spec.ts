@@ -13,31 +13,31 @@ describe('AuthService', () => {
     id: 1,
     name: 'Test User',
     username: 'testuser',
-    hasCompletedOnboarding: false
+    hasCompletedOnboarding: false,
   };
 
   const mockLoginResponse = {
     access_token: 'mock-token',
-    user: mockUser
+    user: mockUser,
   };
 
   beforeEach(() => {
     mockStoreService = {
       getItem: jest.fn(),
       setItem: jest.fn(),
-      removeItem: jest.fn()
+      removeItem: jest.fn(),
     } as unknown as jest.Mocked<StoreService>;
 
     mockHttpClient = {
-      post: jest.fn()
+      post: jest.fn(),
     } as unknown as jest.Mocked<HttpClient>;
 
     TestBed.configureTestingModule({
       providers: [
         AuthService,
         { provide: StoreService, useValue: mockStoreService },
-        { provide: HttpClient, useValue: mockHttpClient }
-      ]
+        { provide: HttpClient, useValue: mockHttpClient },
+      ],
     });
 
     service = TestBed.inject(AuthService);
@@ -60,8 +60,14 @@ describe('AuthService', () => {
       mockHttpClient.post.mockReturnValue(of(mockLoginResponse));
 
       service.login('testuser', 'password').subscribe(() => {
-        expect(mockStoreService.setItem).toHaveBeenCalledWith('access_token', 'mock-token');
-        expect(mockStoreService.setItem).toHaveBeenCalledWith('user', JSON.stringify(mockUser));
+        expect(mockStoreService.setItem).toHaveBeenCalledWith(
+          'access_token',
+          'mock-token'
+        );
+        expect(mockStoreService.setItem).toHaveBeenCalledWith(
+          'user',
+          JSON.stringify(mockUser)
+        );
       });
     });
   });
@@ -82,18 +88,20 @@ describe('AuthService', () => {
     it('should register a new user', () => {
       mockHttpClient.post.mockReturnValue(of(mockUser));
 
-      service.register({
-        username: 'newuser',
-        name: 'New User',
-        password: 'password'
-      }).subscribe(response => {
-        expect(response).toEqual(mockUser);
-      });
+      service
+        .register({
+          username: 'newuser',
+          name: 'New User',
+          password: 'password',
+        })
+        .subscribe((response) => {
+          expect(response).toEqual(mockUser);
+        });
 
       expect(mockHttpClient.post).toHaveBeenCalledWith('auth/register', {
         username: 'newuser',
         name: 'New User',
-        password: 'password'
+        password: 'password',
       });
     });
   });
@@ -109,7 +117,10 @@ describe('AuthService', () => {
       service.setOnboardingCompleted();
 
       const updatedUser = { ...mockUser, hasCompletedOnboarding: true };
-      expect(mockStoreService.setItem).toHaveBeenCalledWith('user', JSON.stringify(updatedUser));
+      expect(mockStoreService.setItem).toHaveBeenCalledWith(
+        'user',
+        JSON.stringify(updatedUser)
+      );
     });
   });
 

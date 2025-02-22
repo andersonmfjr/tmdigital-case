@@ -68,7 +68,7 @@ Vídeo completo: https://drive.google.com/file/d/1njS6VXZ2XQkideB7Hmm7BqI0RqRIPB
 - [x] Fluxo funcional persistindo dados do localStorage
 - [x] Criar guard de autenticação
 - [x] Testes para os componentes de autenticação
-- [ ] Testes para os componentes shared, onboarding e análise de crédito
+- [ ] Testes para os componentes shared (button e input), onboarding e análise de crédito
 - [x] API: POST /register
 - [x] API: POST /login
 - [x] API: POST /farms
@@ -80,4 +80,7 @@ Vídeo completo: https://drive.google.com/file/d/1njS6VXZ2XQkideB7Hmm7BqI0RqRIPB
 - [x] Integrar API com o front-end: Autenticação
 - [x] Integrar API com o front-end: Propriedade
 - [ ] Integrar API com o front-end: Análise de crédito
-- [ ] Criar testes do Front-end para os serviços atualizados
+- [x] Criar testes dos serviços do front-end: Onboarding
+- [x] Criar testes dos serviços do front-end: Auth
+- [x] Criar testes dos serviços do front-end: Farm
+- [ ] Criar testes dos serviços do front-end: Análise de crédito

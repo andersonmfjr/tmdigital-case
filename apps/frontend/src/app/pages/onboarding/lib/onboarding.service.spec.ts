@@ -13,29 +13,29 @@ describe('OnboardingService', () => {
   const mockUser = {
     id: '123',
     email: 'test@example.com',
-    hasCompletedOnboarding: false
+    hasCompletedOnboarding: false,
   };
 
   const mockFarmData = {
     propertyName: 'Test Farm',
     location: 'Test Location',
     sector: 'Test Sector',
-    creditReason: 'Test Credit Reason'
+    creditReason: 'Test Credit Reason',
   };
 
   const mockSavedFarm = {
     id: 1,
     userId: 1,
-    ...mockFarmData
+    ...mockFarmData,
   };
 
   beforeEach(() => {
     mockAuthService = {
-      getUser: jest.fn().mockReturnValue(mockUser)
+      getUser: jest.fn().mockReturnValue(mockUser),
     } as unknown as jest.Mocked<AuthService>;
 
     mockFarmService = {
-      saveFarm: jest.fn().mockReturnValue(of(mockSavedFarm))
+      saveFarm: jest.fn().mockReturnValue(of(mockSavedFarm)),
     } as unknown as jest.Mocked<FarmService>;
 
     mockLocalStorage = jest.spyOn(Storage.prototype, 'setItem');
@@ -44,8 +44,8 @@ describe('OnboardingService', () => {
       providers: [
         OnboardingService,
         { provide: AuthService, useValue: mockAuthService },
-        { provide: FarmService, useValue: mockFarmService }
-      ]
+        { provide: FarmService, useValue: mockFarmService },
+      ],
     });
 
     service = TestBed.inject(OnboardingService);
@@ -72,22 +72,22 @@ describe('OnboardingService', () => {
 
           done();
         },
-        error: done
+        error: done,
       });
     });
 
     it('should handle errors from farm service', (done) => {
       const errorMessage = 'Failed to save farm';
-      mockFarmService.saveFarm = jest.fn().mockReturnValue(
-        throwError(() => new Error(errorMessage))
-      );
+      mockFarmService.saveFarm = jest
+        .fn()
+        .mockReturnValue(throwError(() => new Error(errorMessage)));
 
       service.saveFarm(mockFarmData).subscribe({
         error: (error) => {
           expect(error.message).toBe(errorMessage);
           expect(mockLocalStorage).not.toHaveBeenCalled();
           done();
-        }
+        },
       });
     });
 
@@ -100,7 +100,7 @@ describe('OnboardingService', () => {
         error: () => {
           expect(mockLocalStorage).not.toHaveBeenCalled();
           done();
-        }
+        },
       });
     });
   });

@@ -1,5 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
 import { FarmService } from './farm.service';
 import { Farm } from '../../model/farm.model';
 import { provideHttpClient } from '@angular/common/http';
@@ -10,11 +13,7 @@ describe('FarmService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        FarmService,
-        provideHttpClient(),
-        provideHttpClientTesting()
-      ]
+      providers: [FarmService, provideHttpClient(), provideHttpClientTesting()],
     });
 
     service = TestBed.inject(FarmService);
@@ -40,7 +39,7 @@ describe('FarmService', () => {
         creditReason: 'Test Credit Reason',
       };
 
-      service.getCurrentFarm().subscribe(farm => {
+      service.getCurrentFarm().subscribe((farm) => {
         expect(farm).toEqual(mockFarm);
       });
 
@@ -62,10 +61,10 @@ describe('FarmService', () => {
       const mockResponse: Farm = {
         id: 1,
         userId: 1,
-        ...farmToSave
+        ...farmToSave,
       };
 
-      service.saveFarm(farmToSave).subscribe(farm => {
+      service.saveFarm(farmToSave).subscribe((farm) => {
         expect(farm).toEqual(mockResponse);
       });
 
