@@ -1,6 +1,6 @@
 export interface Farm {
-  id: string;
-  userId: string;
+  id: number;
+  userId: number;
   propertyName: string;
   location: string;
   sector: string;

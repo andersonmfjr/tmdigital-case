@@ -32,8 +32,8 @@ describe('FarmService', () => {
   describe('getCurrentFarm', () => {
     it('should get current farm from API', () => {
       const mockFarm: Farm = {
-        id: '1',
-        userId: 'user1',
+        id: 1,
+        userId: 1,
         propertyName: 'Test Farm',
         location: 'Test Location',
         sector: 'Test Sector',
@@ -60,8 +60,8 @@ describe('FarmService', () => {
       };
 
       const mockResponse: Farm = {
-        id: '1',
-        userId: 'user1',
+        id: 1,
+        userId: 1,
         ...farmToSave
       };
 
